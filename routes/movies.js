@@ -20,4 +20,18 @@ router.get('/:id', (req, res, next) => {
   })
 })
 
+router.post('/', (req, res, next) => {
+  var movie = {
+    title: req.body.title,
+    director: req.body.director,
+    year: req.body.year,
+    my_rating: req.body['my-rating'],
+    poster_url: req.body['poster-url']
+  }
+  db('movies').insert(movie, '*').then(newMovie => {
+    var id = newMovie[0].id
+    res.redirect(`/movies/${id}`)
+  })
+})
+
 module.exports = router
