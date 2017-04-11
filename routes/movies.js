@@ -9,6 +9,10 @@ router.get('/', (req, res, next) => {
   })
 })
 
+router.get('/new', (req, res, next) => {
+  res.render('movies/new')
+})
+
 router.get('/:id', (req, res, next) => {
   var id = req.params.id
   db('movies').select('*').where({ id }).first().then(movie => {
