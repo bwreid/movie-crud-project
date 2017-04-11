@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>{{ movie.title }}</h1>
+  <a href="/movies">Go to All Movies</a>
+  <hr>
+  <div class="row">
+    <div class="col-md-2">
+      <img src="{{ movie.poster_url }}"
+        alt="{{ movie.title }}"
+        class="poster">
+    </div>
+    <div class="col-md-6">
+      <p>Director: {{ movie.director }}</p>
+      <p>Year: {{ movie.year }}</p>
+      <p>My Rating: {{ movie.my_rating }}</p>
+    </div>
+  </div>
+</div>

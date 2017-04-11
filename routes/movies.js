@@ -9,4 +9,11 @@ router.get('/', (req, res, next) => {
   })
 })
 
+router.get('/:id', (req, res, next) => {
+  var id = req.params.id
+  db('movies').select('*').where({ id }).first().then(movie => {
+    res.render('movies/show', { movie })
+  })
+})
+
 module.exports = router
