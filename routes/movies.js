@@ -34,4 +34,11 @@ router.post('/', (req, res, next) => {
   })
 })
 
+router.delete('/:id', (req, res, next) => {
+  var id = req.params.id
+  db('movies').del().where({ id }).then(() => {
+    res.redirect(`/movies`)
+  })
+})
+
 module.exports = router

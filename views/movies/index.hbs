@@ -16,6 +16,15 @@
       <p>Director: {{ this.director }}</p>
       <p>Year: {{ this.year }}</p>
       <p>My Rating: {{ this.my_rating }}</p>
+      <p>
+        <form action="/movies/{{ this.id }}?_method=DELETE" method="POST">
+          <input
+            class="btn btn-sm btn-danger"
+            type="submit"
+            name="delete"
+            value="Delete Movie">
+        </form>
+      </p>
     </div>
   </div>
   {{/each}}
