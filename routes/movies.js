@@ -41,6 +41,21 @@ router.post('/', (req, res, next) => {
   })
 })
 
+router.put('/:id', (req, res, next) => {
+  var id = req.params.id
+  var movie = {
+    title: req.body.title,
+    director: req.body.director,
+    year: req.body.year,
+    my_rating: req.body['my-rating'],
+    poster_url: req.body['poster-url']
+  }
+  db('movies').update(movie, '*').where({ id }).then(updatedMovie => {
+    var id = updatedMovie[0].id
+    res.redirect(`/movies/${id}`)
+  })
+})
+
 router.delete('/:id', (req, res, next) => {
   var id = req.params.id
   db('movies').del().where({ id }).then(() => {
