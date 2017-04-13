@@ -36,8 +36,8 @@ router.post('/', (req, res, next) => {
     my_rating: req.body['my-rating'],
     poster_url: req.body['poster-url']
   }
-  if (Number.isNaN(year) || year < 1878) {
-    res.render('movies/new', { error: 'Year is all fucked.', movie })
+  if (Number.isNaN(year) || year < 1990) {
+    res.render('movies/new', { error: 'Only movies made after 1990.', movie })
   } else {
     db('movies').insert(movie, '*').then(newMovie => {
       var id = newMovie[0].id
