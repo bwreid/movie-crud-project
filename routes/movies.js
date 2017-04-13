@@ -28,6 +28,7 @@ router.get('/:id/edit', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
+  var year = parseInt(req.body.year)
   var movie = {
     title: req.body.title,
     director: req.body.director,
@@ -35,10 +36,14 @@ router.post('/', (req, res, next) => {
     my_rating: req.body['my-rating'],
     poster_url: req.body['poster-url']
   }
-  db('movies').insert(movie, '*').then(newMovie => {
-    var id = newMovie[0].id
-    res.redirect(`/movies/${id}`)
-  })
+  if (Number.isNaN(year) || year < 1878) {
+    res.render('movies/new', { error: 'Year is all fucked.', movie })
+  } else {
+    db('movies').insert(movie, '*').then(newMovie => {
+      var id = newMovie[0].id
+      res.redirect(`/movies/${id}`)
+    })
+  }
 })
 
 router.put('/:id', (req, res, next) => {

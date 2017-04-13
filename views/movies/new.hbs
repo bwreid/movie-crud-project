@@ -2,6 +2,11 @@
   <h1>Create a New Movie</h1>
   <a href="/movies">Go to All Movies</a>
   <hr>
+  {{#if error}}
+  <div class="alert alert-danger">
+    {{ error }}
+  </div>
+  {{/if}}
   <form method="POST" action="/movies" class="well">
     <div class="row">
       <div class="col-md-6">
