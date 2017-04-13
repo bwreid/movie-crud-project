@@ -5,6 +5,7 @@ var logger = require('morgan')
 var bodyParser = require('body-parser')
 var methodOverride = require('method-override')
 var hbs = require('hbs')
+var hbsUtils = require('hbs-utils')(hbs)
 
 var index = require('./routes/index')
 var movies = require('./routes/movies')
@@ -15,7 +16,17 @@ var app = express()
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')
 
-hbs.registerPartials(path.join(__dirname, 'views', 'shared'))
+hbsUtils.registerPartials(path.join(__dirname, 'views'), {
+  match: /\/?.*_.*\.(html|hbs)$/,
+  name: (name) => {
+    var pathArr = name.split('/')
+    var last = pathArr.length - 1
+    pathArr[last] = pathArr[last].slice(1)
+    var newName = pathArr.join('/')
+
+    return newName
+  }
+})
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
